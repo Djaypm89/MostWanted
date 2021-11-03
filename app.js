@@ -16,6 +16,7 @@ function app(people){
       break;
     case 'no':
       // TODO: search by traits
+      searchResults = searchByGender(people);
       break;
       default:
     app(people); // restart app
@@ -90,7 +91,20 @@ function searchByEyeColor(people){
 }
 
 //TODO: add other trait filter functions here.
-
+function searchByGender(people){
+  let personsGender = promptFor("What is the person's gender?", autoValid);
+  let peopleOfSameGender = people.filter(function(potentialMatch){
+    if(potentialMatch.gender === personsGender){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person single person object using the name they entered.
+  console.log(peopleOfSameGender);
+  return peopleOfSameGender;
+}
 
 
 //#endregion
