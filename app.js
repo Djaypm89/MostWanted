@@ -41,6 +41,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    info(person);
     break;
     case "family":
     // TODO: get person's family
@@ -79,7 +80,8 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  console.log(foundPerson);
+  return foundPerson[0];
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -112,6 +114,18 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
+}
+
+function info(person){
+  alert(`${person.firstName} ${person.lastName}:
+  ID: ${person.id},
+  Gender: ${person.gender},
+  DOB: ${person.dob},
+  Height: ${person.height},
+  Weight: ${person.weight},
+  Eye Color: ${person.eyeColor},
+  Occupation: ${person.occupation}.`);
+  
 }
 
 //#endregion
