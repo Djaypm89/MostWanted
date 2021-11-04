@@ -95,13 +95,11 @@ function searchByGender(people){
   let personsGender = promptFor("What is the person's gender?", autoValid);
   let peopleOfSameGender = people.filter(function(potentialMatch){
   if(potentialMatch.gender === personsGender){
-
-  return true;
-  }
-    else{
+    return true;
+  }else{
       return false;
     }
-  })
+  });
   // TODO: find the person single person object using the name they entered.
   console.log(peopleOfSameGender);
 
