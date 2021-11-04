@@ -35,6 +35,7 @@ function app(people){
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
+
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
   if(!person){
@@ -51,6 +52,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
+    parentFinder(person, people);
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -163,6 +165,36 @@ function displayPeople(people){
   }).join("\n"));
 }
 
+function parentFinder (person, people) {
+  let parentList = person.parents;
+  let parentResult = [];
+  for (let i = 0; i < people.length; i++) {
+  for (let j = 0; j < parentList.length; j++) {
+    if (people[i].id === parentList[j])
+      parentResult.push(people[i]);
+
+  }
+}
+
+
+
+// function parentFinderFilter(person, people) {
+//   let parentList = person.parents;
+//   let parentResult = people.filter(function(potentialMatch){
+//    for (let i = 0; i < parentList.length; i++) { 
+//     if(potentialMatch.id === parentList[i]){
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   }
+//   }) 
+
+//   alert(parentResult);
+
+// }
+
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
@@ -248,4 +280,4 @@ function customValidation(input){
 // - after locating person, add option (or at end of search) to display family members( parents, spouse, siblings.)
 // - make sure program runs throughout. 
 //   - create/finish function (loop and conditionals) to display family members
-// - bonus (recursion)  find out what this is. 
+// - bonus (recursion)  find out what this is
