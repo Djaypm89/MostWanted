@@ -165,7 +165,7 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function parentFinder (person, people) {
+/* function parentFinder (person, people) {
   let parentList = person.parents;
   let parentResult = [];
   for (let i = 0; i < people.length; i++) {
@@ -174,26 +174,24 @@ function parentFinder (person, people) {
       parentResult.push(people[i]);
 
   }
+} */
+
+function parentFinder(person, people) {
+  let parentList = person.parents;
+  let parentResult = people.filter(function(potentialMatch){
+   for (let i = 0; i < parentList.length; i++) { 
+    if(potentialMatch.id === parentList[0] || potentialMatch.id === parentList[1]){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  }) 
+
+  alert(parentResult);
+
 }
-
-
-
-// function parentFinderFilter(person, people) {
-//   let parentList = person.parents;
-//   let parentResult = people.filter(function(potentialMatch){
-//    for (let i = 0; i < parentList.length; i++) { 
-//     if(potentialMatch.id === parentList[i]){
-//       return true;
-//     }
-//     else{
-//       return false;
-//     }
-//   }
-//   }) 
-
-//   alert(parentResult);
-
-// }
 
 function displayPerson(person){
   // print all of the information about a person:
