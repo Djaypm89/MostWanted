@@ -187,3 +187,23 @@ function customValidation(input){
 }
 
 //#endregion
+
+// ALGORITHM
+
+// - Identify what code is operational and what runs in the browser already 
+// - prompt user to search by first and last name works, it returns person as "undefined undefined"
+// - program stops (code unfinished or bugged) at prompt for person "info, parents, descendants"
+// - things to be completed:
+//   - Create re-useable function for input validation that can be used throughout project. 
+//     - define criteria for valid input for each prompt.
+// - first and last name search criteria already in place, finish code to allow user to search by 
+//   other critera.  (i.e. eye color and first, name) but up to 5).
+// - return relevant list of people as defined by search criteria, verify correct results. 
+//   - after search by 2 criteria and display results is operational, consider adding more search criteria. 
+// - after search results are displayed and verified, create/finish function to display persons clientInformation. 
+// - from displayed information, display only persons descendents if applicable.
+//   - create function (loop thru arrays?) to display identify and display descendents only. 
+// - after locating person, add option (or at end of search) to display family members( parents, spouse, siblings.)
+// - make sure program runs throughout. 
+//   - create/finish function (loop and conditionals) to display family members
+// - bonus (recursion)  find out what this is. 
