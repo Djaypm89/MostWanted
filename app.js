@@ -52,7 +52,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
-    parentFinder(person, people);
+    familyFinder(person, people);
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -175,23 +175,57 @@ function displayPeople(people){
 
   }
 } */
+function familyFinder(person, people){
 
-function parentFinder(person, people) {
-  let parentList = person.parents;
-  let parentResult = people.filter(function(potentialMatch){
-   for (let i = 0; i < parentList.length; i++) { 
-    if(potentialMatch.id === parentList[0] || potentialMatch.id === parentList[1]){
-      return true;
+  //Parent Finder.
+  /* function parentFinder(person, people) {
+    let parentList = person.parents;
+    let parentResult = people.filter(function(potentialMatch){
+     for (let i = 0; i < parentList.length; i++) { 
+      if(potentialMatch.id === parentList[0] || potentialMatch.id === parentList[1]){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
-    else{
-      return false;
-    }
+    }) 
+    alert(parentResult);
+  } */
+
+  //Spouse Finder.
+  function spouseFinder(person, people) {
+    let spouse = person.currentSpouse;
+    let spouseResult = people.filter(function(potentialMatch){ 
+      if(potentialMatch.id === spouse){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }) 
+    alert(spouseResult);
   }
-  }) 
 
-  alert(parentResult);
+  spouseFinder(person, people);
 
+  //Sibling Finder.
+  /* function siblingFinder(person, people) {
+    let parentList = person.parents;
+    let parentResult = people.filter(function(potentialMatch){
+     for (let i = 0; i < parentList.length; i++) { 
+      if(potentialMatch.id === parentList[0] || potentialMatch.id === parentList[1]){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    }) 
+    alert(parentResult);
+  } */
 }
+
 
 function displayPerson(person){
   // print all of the information about a person:
