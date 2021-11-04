@@ -114,15 +114,12 @@ function searchByGender(people){
 
 
 function multipleCriteriaSearch (people) {
-  let criteriaType = prompt("Which criteria would you like to search by?  Type gender or dob.").toLowerCase;
+  let criteriaType = prompt("Which criteria would you like to search by?  Type gender or dob.").toLowerCase();
   let searchResults = ""; 
   switch(criteriaType) {
      case "gender":
        searchResults = searchByGender(people);
-       break;
-
-       
-      
+       break; 
    }
    return searchResults;
 }
