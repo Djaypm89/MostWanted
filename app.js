@@ -207,23 +207,23 @@ function familyFinder(person, people){
     alert(spouseResult);
   }
 
-  spouseFinder(person, people);
-
   //Sibling Finder.
-  /* function siblingFinder(person, people) {
-    let parentList = person.parents;
-    let parentResult = people.filter(function(potentialMatch){
-     for (let i = 0; i < parentList.length; i++) { 
-      if(potentialMatch.id === parentList[0] || potentialMatch.id === parentList[1]){
+  function siblingFinder(person, people) {
+    let parents = person.parents;
+    let siblingResult = people.filter(function(potentialMatch){
+      if((potentialMatch.parents === parents[0] || potentialMatch.parents === parents[1]) && potentialMatch.id !== person.id){
         return true;
       }
       else{
         return false;
       }
-    }
     }) 
-    alert(parentResult);
-  } */
+    alert(siblingResult);
+  }
+ 
+  //parentFinder(person, people);
+  //spouseFinder(person, people);
+  siblingFinder(person, people);
 }
 
 
