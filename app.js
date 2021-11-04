@@ -1,6 +1,9 @@
 "use strict"
 
 
+// new alert for "choose additional criteria"
+// 
+
 //Menu functions.
 //Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
@@ -16,7 +19,9 @@ function app(people){
       break;
     case 'no':
       // TODO: search by traits
-      searchResults = searchByGender(people);
+      // call function for additional search by critera
+      searchResults = multipleCriteriaSearch(people);
+      
       break;
       default:
     app(people); // restart app
@@ -106,6 +111,23 @@ function searchByGender(people){
   return peopleOfSameGender;
 }
 
+
+
+function multipleCriteriaSearch (people) {
+  let criteriaType = prompt("Which criteria would you like to search by?  Type gender or dob.").toLowerCase;
+  let searchResults = ""; 
+  switch(criteriaType) {
+     case "gender":
+       searchResults = searchByGender(people);
+       break;
+
+       
+      
+   }
+   return searchResults;
+}
+
+// (searchResults)
 
 //#endregion
 
