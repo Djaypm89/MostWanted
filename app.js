@@ -111,17 +111,38 @@ function searchByGender(people){
   return peopleOfSameGender;
 }
 
+function searchByDOB(people){
+  let dob = promptFor("What is the person's Date of Birth?", autoValid);
+
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.dob === dob){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person single person object using the name they entered.
+  console.log(foundPerson);
+  return foundPerson;
+}
+
 
 
 function multipleCriteriaSearch (people) {
   let criteriaType = prompt("Which criteria would you like to search by?  Type gender or dob.").toLowerCase();
   let searchResults = ""; 
   switch(criteriaType) {
-     case "gender":
+    case "gender":
        searchResults = searchByGender(people);
        displayPeople(searchResults);
        multipleCriteriaSearch(searchResults);
        break; 
+    case "dob":
+      searchResults = searchByDOB(people);
+      displayPeople(searchResults);
+      multipleCriteriaSearch(searchResults);
+      break; 
    }
    return searchResults;
 }
