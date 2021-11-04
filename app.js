@@ -119,6 +119,8 @@ function multipleCriteriaSearch (people) {
   switch(criteriaType) {
      case "gender":
        searchResults = searchByGender(people);
+       displayPeople(searchResults);
+       multipleCriteriaSearch(searchResults);
        break; 
    }
    return searchResults;
