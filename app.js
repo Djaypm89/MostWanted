@@ -178,7 +178,7 @@ function displayPeople(people){
 function familyFinder(person, people){
 
   //Parent Finder.
-  /* function parentFinder(person, people) {
+  function parentFinder(person, people) {
     let parentList = person.parents;
     let parentResult = people.filter(function(potentialMatch){
      for (let i = 0; i < parentList.length; i++) { 
@@ -190,8 +190,8 @@ function familyFinder(person, people){
       }
     }
     }) 
-    alert(parentResult);
-  } */
+    return parentResult;
+  }
 
   //Spouse Finder.
   function spouseFinder(person, people) {
@@ -204,26 +204,41 @@ function familyFinder(person, people){
         return false;
       }
     }) 
-    alert(spouseResult);
+    return spouseResult;
   }
 
   //Sibling Finder.
   function siblingFinder(person, people) {
     let parents = person.parents;
     let siblingResult = people.filter(function(potentialMatch){
-      if((potentialMatch.parents === parents[0] || potentialMatch.parents === parents[1]) && potentialMatch.id !== person.id){
+      if((potentialMatch.parents[0] === parents[0] || potentialMatch.parents[1] === parents[1]) && potentialMatch.id !== person.id){
         return true;
       }
       else{
         return false;
       }
     }) 
-    alert(siblingResult);
+    return siblingResult;
   }
  
-  //parentFinder(person, people);
-  //spouseFinder(person, people);
-  siblingFinder(person, people);
+  let parent = parentFinder(person, people);
+  let spouse = spouseFinder(person, people);
+  let sibling = siblingFinder(person, people);
+
+  let parent01 = parent[0];
+  let parent02 = parent[1];
+
+  let spouse01 = spouse[0];
+
+  let sibling01 = sibling[0];
+  let sibling02 = sibling[1];
+
+  alert(
+    `${person.firstName}'s Family:
+    Parent(s): ${parent01.firstName} and ${parent02.firstName}
+    Spouse: ${spouse01.firstName}
+    Sibling(s): ${sibling01.firstName} and ${sibling02.firstName}`
+  );
 }
 
 
