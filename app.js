@@ -1,9 +1,5 @@
 "use strict"
 
-
-// new alert for "choose additional criteria"
-// 
-
 //Menu functions.
 //Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
@@ -18,10 +14,8 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
       // call function for additional search by critera
       searchResults = multipleCriteriaSearch(people);
-      
       break;
       default:
     app(people); // restart app
@@ -35,9 +29,9 @@ function app(people){
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
-
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-
+  /* Here we pass in the entire person object that we found in our search, 
+  as well as the entire original dataset of people. We need people in order 
+  to find descendants and other information that the user may want. */
   if(!person){
     alert("Could not find that individual.");
     return app(people); // restart
@@ -55,7 +49,7 @@ function mainMenu(person, people){
     familyFinder(person, people);
     break;
     case "descendants":
-    // TODO: get person's descendants
+    desFinder(person, people)
     break;
     case "restart":
     app(people); // restart
@@ -87,17 +81,11 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person single person object using the name they entered.
-  console.log(foundPerson);
+  
   return foundPerson[0];
 }
 
-//unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people){
-
-}
-
-//TODO: add other trait filter functions here.
+//GENDER FILTER
 function searchByGender(people){
   let personsGender = promptFor("What is the person's gender?", autoValid);
   let peopleOfSameGender = people.filter(function(potentialMatch){
@@ -108,11 +96,11 @@ function searchByGender(people){
       return false;
     }
   })
-  // TODO: find the person single person object using the name they entered.
-  console.log(peopleOfSameGender);
+  
   return peopleOfSameGender;
 }
 
+//DOB FILTER
 function searchByDOB(people){
   let dob = promptFor("What is the person's Date of Birth?", autoValid);
 
@@ -124,9 +112,24 @@ function searchByDOB(people){
       return false;
     }
   })
-  // TODO: find the person single person object using the name they entered.
-  console.log(foundPerson);
+  
   return foundPerson;
+}
+
+//EYE COLOR FILTER
+function searchByEyeColor(people){
+  let personsGender = promptFor("What is the person's gender?", autoValid);
+  let peopleOfSameGender = people.filter(function(potentialMatch){
+    if(potentialMatch.gender === personsGender){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  
+  console.log(peopleOfSameGender);
+  return peopleOfSameGender;
 }
 
 
@@ -160,11 +163,7 @@ function multipleCriteriaSearch (people) {
       break;
    }
    return searchResults[0];
-   
-   
 }
-
-// (searchResults)
 
 //#endregion
 
@@ -180,6 +179,20 @@ function displayPeople(people){
   }).join("\n"));
 }
 
+//Info Menu Option.
+function info(person){
+  alert(`${person.firstName} ${person.lastName}:
+  ID: ${person.id},
+  Gender: ${person.gender},
+  DOB: ${person.dob},
+  Height: ${person.height},
+  Weight: ${person.weight},
+  Eye Color: ${person.eyeColor},
+  Occupation: ${person.occupation}.`);
+  
+}
+
+//Family Finder Menu Option.
 function familyFinder(person, people){
 
   //Parent Finder.
@@ -282,6 +295,41 @@ sibling02 = sibling02.firstName;
   );
 }
 
+//Descendants Menu Option.
+function desFinder(person, people){
+  let kids;
+  let grandKids;
+  
+  function finder(person, people){
+    
+    let foundDes = people.filter(function(potentialMatch){
+      if(potentialMatch.parents[0] === person.id || potentialMatch.parents[1] === person.id){
+        return true;
+      }
+      else{
+        return false;
+      }
+    })
+    
+    return foundDes;
+  }
+
+  let names = [];
+
+  kids = finder(person, people);
+  console.log(kids);
+
+  for(let i = 0; i < kids.length; i++){
+    grandKids = finder(kids[i], people);
+    console.log(grandKids);
+    for(let j = 0; j < grandKids.length; j++){
+      names.push(grandKids[j].firstName);
+      console.log(names);
+    }
+  }
+
+}
+
 
 
 
@@ -292,18 +340,6 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
-}
-
-function info(person){
-  alert(`${person.firstName} ${person.lastName}:
-  ID: ${person.id},
-  Gender: ${person.gender},
-  DOB: ${person.dob},
-  Height: ${person.height},
-  Weight: ${person.weight},
-  Eye Color: ${person.eyeColor},
-  Occupation: ${person.occupation}.`);
-  
 }
 
 //#endregion
