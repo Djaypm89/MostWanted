@@ -137,7 +137,7 @@ function multipleCriteriaSearch (people) {
   let searchResults = ""; 
 
   if(people.length == 1){
-    criteriaType = "exit"; 
+    criteriaType = "name"; 
     searchResults = people;
   }else{
     criteriaType = prompt("Which criteria would you like to search by?  Type gender or dob.").toLowerCase();
@@ -154,9 +154,12 @@ function multipleCriteriaSearch (people) {
       displayPeople(searchResults);
       multipleCriteriaSearch(searchResults);
       break;
-    case "exit":
-      return searchResults[0];
+    case "name":
+      //return searchResults[0];
+      searchResults = people;
+      break;
    }
+   return searchResults[0];
    
    
 }
