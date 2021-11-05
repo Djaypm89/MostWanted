@@ -165,16 +165,6 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-/* function parentFinder (person, people) {
-  let parentList = person.parents;
-  let parentResult = [];
-  for (let i = 0; i < people.length; i++) {
-  for (let j = 0; j < parentList.length; j++) {
-    if (people[i].id === parentList[j])
-      parentResult.push(people[i]);
-
-  }
-} */
 function familyFinder(person, people){
 
   //Parent Finder.
