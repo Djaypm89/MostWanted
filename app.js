@@ -328,10 +328,11 @@ function desFinder(person, people){
     }
   }
 
+  for(let i = 0; i < kids.length; i++){
+    names.push(kids[i].firstName);
+  }
+  alert(`Descendants: ${names.toString()}`);
 }
-
-
-
 
 function displayPerson(person){
   // print all of the information about a person:
