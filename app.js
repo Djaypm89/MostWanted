@@ -133,15 +133,16 @@ function searchByDOB(people){
 
 function multipleCriteriaSearch (people) {
   //Check Condition of Array. if Array > 1.
-  let criteriaType; 
+  let criteriaType;
+  let searchResults = ""; 
 
   if(people.length == 1){
-    criteriaType = "name"; 
+    criteriaType = "exit"; 
+    searchResults = people;
   }else{
     criteriaType = prompt("Which criteria would you like to search by?  Type gender or dob.").toLowerCase();
   }
 
-  let searchResults = ""; 
   switch(criteriaType) {
     case "gender":
        searchResults = searchByGender(people);
@@ -153,11 +154,11 @@ function multipleCriteriaSearch (people) {
       displayPeople(searchResults);
       multipleCriteriaSearch(searchResults);
       break;
-    case "name":
-      searchResults = people;
-      break;  
+    case "exit":
+      return searchResults[0];
    }
-   return searchResults[0];
+   
+   
 }
 
 // (searchResults)
