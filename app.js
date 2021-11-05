@@ -199,7 +199,14 @@ function familyFinder(person, people){
 
   //Sibling Finder.
   function siblingFinder(person, people) {
-    let parents = person.parents;
+    let parents;
+    if (person.parents == []) {
+      return;
+    }
+    else {
+      parents = person.parents;
+    }
+    
     let siblingResult = people.filter(function(potentialMatch){
       if((potentialMatch.parents[0] === parents[0] || potentialMatch.parents[1] === parents[1]) && potentialMatch.id !== person.id){
         return true;
@@ -218,18 +225,47 @@ function familyFinder(person, people){
   let parent01 = parent[0];
   let parent02 = parent[1];
 
+
+  if (parent01 == undefined) {
+    parent01 = "";
+  }
+  if (parent02 == undefined) {
+    parent02 = "";
+  }
+  parent01 = parent01.firstName;
+  parent02 = parent02.firstName;
+  
+
+
   let spouse01 = spouse[0];
+  if (spouse01 == undefined) {
+    spouse01 = "";
+  }
+  spouse01 = spouse01.firstName;
+
 
   let sibling01 = sibling[0];
   let sibling02 = sibling[1];
 
+  if (sibling01 == undefined) {
+    sibling01 = "";
+  }
+  if (sibling02 == undefined) {
+    sibling02 = "";
+  }
+sibling01 = sibling01.firstName;
+sibling02 = sibling02.firstName;
+
+
   alert(
     `${person.firstName}'s Family:
-    Parent(s): ${parent01.firstName} and ${parent02.firstName}
-    Spouse: ${spouse01.firstName}
-    Sibling(s): ${sibling01.firstName} and ${sibling02.firstName}`
+    Parent(s): ${parent01} , ${parent02}
+    Spouse: ${spouse01}
+    Sibling(s): ${sibling01} and ${sibling02}`
   );
 }
+
+
 
 
 function displayPerson(person){
