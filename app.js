@@ -199,6 +199,7 @@ function familyFinder(person, people){
 
   //Sibling Finder.
   function siblingFinder(person, people) {
+    let siblingResult;
     let parents;
     if (person.parents == 0) {
       return siblingResult = "";
@@ -208,7 +209,7 @@ function familyFinder(person, people){
       parents = person.parents;
     }
     
-    let siblingResult = people.filter(function(potentialMatch){
+    siblingResult = people.filter(function(potentialMatch){
       if((potentialMatch.parents[0] === parents[0] || potentialMatch.parents[1] === parents[1]) && potentialMatch.id !== person.id){
         return true;
       }
