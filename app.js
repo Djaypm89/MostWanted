@@ -200,8 +200,9 @@ function familyFinder(person, people){
   //Sibling Finder.
   function siblingFinder(person, people) {
     let parents;
-    if (person.parents == []) {
-      return;
+    if (person.parents == 0) {
+      return siblingResult = "";
+      
     }
     else {
       parents = person.parents;
