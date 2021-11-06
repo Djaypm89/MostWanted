@@ -7,7 +7,7 @@
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes', 'no'" yesNo).toLowerCase();
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes', 'no'", yesNo).toLowerCase();
   let searchResults;
   switch(searchType){
     case 'yes':
