@@ -7,7 +7,7 @@
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes', 'no'" yesNo).toLowerCase();
   let searchResults;
   switch(searchType){
     case 'yes':
@@ -17,7 +17,7 @@ function app(people){
       searchResults = multipleCriteriaSearch(people);
       app(people);
       break;
-      default:
+    default:
     app(people); // restart app
       break;
   }
@@ -37,17 +37,20 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid).toLowerCase();
 
   switch(displayOption){
     case "info":
       info(person);
+      mainMenu(person, people);
       break;
     case "family":
       familyFinder(person, people);
+      mainMenu(person, people);
       break;
     case "descendants":
       desFinder(person, people)
+      mainMenu(person, people);
      break;
     case "restart":
       app(people); // restart
@@ -68,8 +71,14 @@ function mainMenu(person, people){
 
 //NAME FILTER
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstName = promptFor("What is the person's first name?", autoValid).toLowerCase();
+  let lastName = promptFor("What is the person's last name?", autoValid).toLowerCase();
+
+  let capitalLetter = firstName.slice(0,1).toUpperCase();
+  firstName = firstName.replace(firstName[0], capitalLetter);
+
+  capitalLetter = lastName.slice(0,1).toUpperCase();
+  lastName = lastName.replace(lastName[0], capitalLetter);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
@@ -85,7 +94,7 @@ function searchByName(people){
 
 //GENDER FILTER
 function searchByGender(people){
-  let personsGender = promptFor("What is the person's Gender?", autoValid);
+  let personsGender = promptFor("What is the person's Gender?", autoValid).toLowerCase();
   let peopleOfSameGender = people.filter(function(potentialMatch){
     if(potentialMatch.gender === personsGender){
       return true;
@@ -149,7 +158,7 @@ function searchByWeight(people){
 
 //EYE COLOR FILTER
 function searchByEyeColor(people){
-  let eyeColor = prompt("What is the person's eye color?");
+  let eyeColor = prompt("What is the person's eye color?").toLowerCase();
 
   let eyeColorResults = people.filter(function(potentialMatch){
     if(potentialMatch.eyeColor === eyeColor){
@@ -316,46 +325,27 @@ function familyFinder(person, people){
   let spouse = spouseFinder(person, people);
   let sibling = siblingFinder(person, people);
 
-  let parent01 = parent[0];
-  let parent02 = parent[1];
+  let parentList = [];
+  let spouseList = [];
+  let siblingList = [];
 
-
-  if (parent01 == undefined) {
-    parent01 = "";
+  for(let i = 0; i < parent.length; i++){
+    parentList.push(parent[i].firstName);
   }
-  if (parent02 == undefined) {
-    parent02 = "";
+
+  for(let i = 0; i < spouse.length; i++){
+    spouseList.push(spouse[i].firstName);
   }
-  parent01 = parent01.firstName;
-  parent02 = parent02.firstName;
-  
 
-
-  let spouse01 = spouse[0];
-  if (spouse01 == undefined) {
-    spouse01 = "";
+  for(let i = 0; i < sibling.length; i++){
+    siblingList.push(sibling[i].firstName);
   }
-  spouse01 = spouse01.firstName;
-
-
-  let sibling01 = sibling[0];
-  let sibling02 = sibling[1];
-
-  if (sibling01 == undefined) {
-    sibling01 = "";
-  }
-  if (sibling02 == undefined) {
-    sibling02 = "";
-  }
-sibling01 = sibling01.firstName;
-sibling02 = sibling02.firstName;
-
 
   alert(
     `${person.firstName}'s Family:
-    Parent(s): ${parent01} , ${parent02}
-    Spouse: ${spouse01}
-    Sibling(s): ${sibling01} and ${sibling02}`
+    Parent(s): ${parentList}
+    Spouse: ${spouseList}
+    Sibling(s): ${siblingList}`
   );
 }
 
