@@ -68,7 +68,7 @@ function mainMenu(person, people){
 /////////////////////////////////////////////////////////////////
 //#region 
 
-//nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
+//NAME FILTER
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
@@ -116,11 +116,22 @@ function searchByDOB(people){
   return foundPerson;
 }
 
+//HEIGHT FILTER
+function searchByHeight(){
+
+}
+
+//WEIGHT FILTER
+function searchByWeight(){
+
+}
+
 //EYE COLOR FILTER
 function searchByEyeColor(people){
-  let personsGender = promptFor("What is the person's gender?", autoValid);
-  let peopleOfSameGender = people.filter(function(potentialMatch){
-    if(potentialMatch.gender === personsGender){
+  let eyeColor = prompt("What is the person's eye color?");
+
+  let eyeColorResults = people.filter(function(potentialMatch){
+    if(potentialMatch.eyeColor === eyeColor){
       return true;
     }
     else{
@@ -128,8 +139,7 @@ function searchByEyeColor(people){
     }
   })
   
-  console.log(peopleOfSameGender);
-  return peopleOfSameGender;
+  return eyeColor;
 }
 
 
