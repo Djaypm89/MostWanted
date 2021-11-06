@@ -14,8 +14,8 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // call function for additional search by critera
       searchResults = multipleCriteriaSearch(people);
+      app(people);
       break;
       default:
     app(people); // restart app
@@ -41,23 +41,21 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
-    info(person);
-    break;
+      info(person);
+      break;
     case "family":
-    // TODO: get person's family
-    familyFinder(person, people);
-    break;
+      familyFinder(person, people);
+      break;
     case "descendants":
-    desFinder(person, people)
-    break;
+      desFinder(person, people)
+     break;
     case "restart":
-    app(people); // restart
-    break;
+      app(people); // restart
+      break;
     case "quit":
-    return; // stop execution
+     return; // stop execution
     default:
-    return mainMenu(person, people); // ask again
+      return mainMenu(person, people); // ask again
   }
 }
 
@@ -166,48 +164,69 @@ function searchByEyeColor(people){
 }
 
 function multipleCriteriaSearch (people) {
-  //Check Condition of Array. if Array > 1.
-  let criteriaType;
   let searchResults = ""; 
 
-  if(people.length == 1){
-    criteriaType = "name"; 
-    searchResults = people;
-  }else{
-    criteriaType = prompt("Which criteria would you like to search by?  Type: gender, dob, height, weight or eye color.").toLowerCase();
+  let criteriaType = prompt("Which criteria would you like to search by?  Type: gender, dob, height, weight, eye color or type exit to leave search.").toLowerCase();
+
+  if(!validCriteria(criteriaType)){
+    alert("Invalid Criteria!");
+    criteriaType = "exit";
   }
 
   switch(criteriaType) {
     case "gender":
        searchResults = searchByGender(people);
-       displayPeople(searchResults);
+       if(searchResults == 0){
+        alert("No Matches!");
+        return;
+       }else{
+        displayPeople(searchResults);
+       }
        multipleCriteriaSearch(searchResults);
        break; 
     case "dob":
       searchResults = searchByDOB(people);
-      displayPeople(searchResults);
+      if(searchResults == 0){
+        alert("No Matches!");
+        return;
+       }else{
+        displayPeople(searchResults);
+       }
       multipleCriteriaSearch(searchResults);
       break;
     case "height":
         searchResults = searchByHeight(people);
-        displayPeople(searchResults);
+        if(searchResults == 0){
+          alert("No Matches!");
+          return;
+         }else{
+          displayPeople(searchResults);
+         }
         multipleCriteriaSearch(searchResults);
         break;
     case "weight":
       searchResults = searchByWeight(people);
-      displayPeople(searchResults);
+      if(searchResults == 0){
+        alert("No Matches!");
+        return;
+       }else{
+        displayPeople(searchResults);
+       }
       multipleCriteriaSearch(searchResults);
       break;
     case "eye color":
       searchResults = searchByEyeColor(people);
-      displayPeople(searchResults);
+      if(searchResults == 0){
+        alert("No Matches!");
+        return;
+       }else{
+        displayPeople(searchResults);
+       }
       multipleCriteriaSearch(searchResults);
       break;
     case "exit":
-      app();
-      break;
+      return;
    }
-   return searchResults[0];
 }
 
 //#endregion
@@ -373,10 +392,14 @@ function desFinder(person, people){
     }
   }
 
-  for(let i = 0; i < kids.length; i++){
-    names.push(kids[i].firstName);
+  if(kids.length == 0){
+    alert("No Descendants Found!");
+  }else{
+    for(let i = 0; i < kids.length; i++){
+      names.push(kids[i].firstName);
+    }
+    alert(`Descendants: ${names.toString()}`);
   }
-  alert(`Descendants: ${names.toString()}`);
 }
 
 function displayPerson(person){
@@ -428,8 +451,15 @@ function autoValid(input){
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
-function customValidation(input){
-  
+function validCriteria(criteriaType){
+  let criteriaList = ["gender", "dob", "height", "weight", "eye color", "exit"];
+
+  for(let i = 0; i < criteriaList.length; i++){
+    if(criteriaList[i] == criteriaType){
+      return true;
+    }
+  }
+  return false;
 }
 
 //#endregion
