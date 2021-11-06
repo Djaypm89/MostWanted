@@ -87,7 +87,7 @@ function searchByName(people){
 
 //GENDER FILTER
 function searchByGender(people){
-  let personsGender = promptFor("What is the person's gender?", autoValid);
+  let personsGender = promptFor("What is the person's Gender?", autoValid);
   let peopleOfSameGender = people.filter(function(potentialMatch){
     if(potentialMatch.gender === personsGender){
       return true;
@@ -102,7 +102,7 @@ function searchByGender(people){
 
 //DOB FILTER
 function searchByDOB(people){
-  let dob = promptFor("What is the person's Date of Birth?", autoValid);
+  let dob = promptFor("What is the person's Date of Birth? MM/DD/YYYY", autoValid);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.dob === dob){
@@ -117,12 +117,35 @@ function searchByDOB(people){
 }
 
 //HEIGHT FILTER
-function searchByHeight(){
+function searchByHeight(people){
+  let height = prompt("What is the person's height?");
 
+  let heightResults = people.filter(function(potentialMatch){
+    if(potentialMatch.height == height){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  
+  return heightResults;
 }
 
 //WEIGHT FILTER
-function searchByWeight(){
+function searchByWeight(people){
+  let weight = prompt("What is the person's weight?");
+
+  let weightResults = people.filter(function(potentialMatch){
+    if(potentialMatch.weight == weight){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  
+  return weightResults;
 
 }
 
@@ -139,10 +162,8 @@ function searchByEyeColor(people){
     }
   })
   
-  return eyeColor;
+  return eyeColorResults;
 }
-
-
 
 function multipleCriteriaSearch (people) {
   //Check Condition of Array. if Array > 1.
@@ -153,7 +174,7 @@ function multipleCriteriaSearch (people) {
     criteriaType = "name"; 
     searchResults = people;
   }else{
-    criteriaType = prompt("Which criteria would you like to search by?  Type gender or dob.").toLowerCase();
+    criteriaType = prompt("Which criteria would you like to search by?  Type: gender, dob, height, weight or eye color.").toLowerCase();
   }
 
   switch(criteriaType) {
@@ -167,9 +188,23 @@ function multipleCriteriaSearch (people) {
       displayPeople(searchResults);
       multipleCriteriaSearch(searchResults);
       break;
-    case "name":
-      //return searchResults[0];
-      searchResults = people;
+    case "height":
+        searchResults = searchByHeight(people);
+        displayPeople(searchResults);
+        multipleCriteriaSearch(searchResults);
+        break;
+    case "weight":
+      searchResults = searchByWeight(people);
+      displayPeople(searchResults);
+      multipleCriteriaSearch(searchResults);
+      break;
+    case "eye color":
+      searchResults = searchByEyeColor(people);
+      displayPeople(searchResults);
+      multipleCriteriaSearch(searchResults);
+      break;
+    case "exit":
+      app();
       break;
    }
    return searchResults[0];
