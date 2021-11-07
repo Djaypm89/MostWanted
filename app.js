@@ -302,6 +302,7 @@ function familyFinder(person, people){
   function siblingFinder(person, people) {
     let siblingResult;
     let parents;
+    
     if (person.parents == 0) {
       return siblingResult = "";
       
@@ -311,11 +312,15 @@ function familyFinder(person, people){
     }
     
     siblingResult = people.filter(function(potentialMatch){
-      if((potentialMatch.parents[0] === parents[0] || potentialMatch.parents[1] === parents[1]) && potentialMatch.id !== person.id){
-        return true;
-      }
-      else{
-        return false;
+      for(let i = 0; i < parents.length; i++){
+        for(let j = 0; j < potentialMatch.parents.length; j++){
+          if(potentialMatch.parents[j] === parents[i] && potentialMatch.id !== person.id){
+            return true;
+          }
+          else{
+            return false;
+          }
+        }
       }
     }) 
     return siblingResult;
